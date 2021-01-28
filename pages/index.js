@@ -4,6 +4,7 @@ import Widget from "../src/components/Widget";
 import Footer from "../src/components/Footer";
 import GithubCorner from "../src/components/GithubCorner";
 import QuizBackground from "../src/components/QuizBackground";
+import Head from "next/head";
 
 const QuizContainer = styled.div`
   width: 100%;
@@ -19,6 +20,13 @@ const QuizContainer = styled.div`
 export default function Home() {
   return (
     <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>Universo Quiz</title>
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=4528&q=80"
+        />
+      </Head>
       <QuizContainer>
         <Widget>
           <Widget.Header>
