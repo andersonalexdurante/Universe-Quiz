@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Head from "next/head";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import Lottie from "react-lottie";
 import db from "../db.json";
 import Widget from "../src/components/Widget";
@@ -37,6 +38,8 @@ export default function Home() {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+  const [nameState, setNameState] = useState("");
+  const router = useRouter();
 
   return (
     <QuizBackground backgroundImage={db.bg}>
@@ -56,9 +59,25 @@ export default function Home() {
               <h1>Universo Quiz</h1>
             </Widget.Header>
             <Widget.Content>
-              <form onSubmit>
-                <input placeholder="Diz aí seu nome pra jogar :)" />
-                <button type="submit">Jogar [seu nome]</button>
+              <p>
+                Teste seus conhecimentos de <strong>Astronomia!</strong>
+              </p>
+              <form
+                onSubmit={function (event) {
+                  event.preventDefault();
+                  router.push(`/quiz?name=${nameState}`);
+                }}
+              >
+                <input
+                  placeholder="Diz aí seu nome pra jogar :)"
+                  onChange={function (event) {
+                    event.preventDefault();
+                    setNameState(event.target.value);
+                  }}
+                />
+                <button type="submit" disabled={nameState.length === 0}>
+                  Jogar
+                </button>
               </form>
             </Widget.Content>
           </Widget>
@@ -71,7 +90,12 @@ export default function Home() {
           </Widget>
           <Footer />
         </QuizContainer>
-        <Lottie options={defaultOptions} height={500} width={500} />
+        <Lottie
+          isClickToPauseDisabled={true}
+          options={defaultOptions}
+          height={500}
+          width={500}
+        />
       </Container>
 
       <GithubCorner projectUrl="https://github.com/andersonalexdurante/Universe-Quiz" />
