@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Lottie from "react-lottie";
 import db from "../db.json";
+import animationData from "../src/assets/astronaut.json";
 import Widget from "../src/components/Widget";
 import Footer from "../src/components/Footer";
 import GithubCorner from "../src/components/GithubCorner";
 import QuizBackground from "../src/components/QuizBackground";
 import QuizLogo from "../src/components/QuizLogo";
-import animationData from "../src/assets/astronaut.json";
+import Input from "../src/components/Input";
+import Button from "../src/components/Button";
 
 const Container = styled.div`
   display: flex;
@@ -68,24 +70,26 @@ export default function Home() {
                   router.push(`/quiz?name=${nameState}`);
                 }}
               >
-                <input
+                <Input
                   placeholder="Diz aí seu nome pra jogar :)"
                   onChange={function (event) {
                     event.preventDefault();
                     setNameState(event.target.value);
                   }}
                 />
-                <button type="submit" disabled={nameState.length === 0}>
+                <Button type="submit" disabled={nameState.length === 0}>
                   Jogar
-                </button>
+                </Button>
               </form>
             </Widget.Content>
           </Widget>
 
           <Widget>
             <Widget.Content>
-              <h1>Quizes da Galera</h1>
-              <p>lorem ipsum dolor sit amet...</p>
+              <h1>Outros Quizes Topzera</h1>
+              <a href="https://alura-pokemon-quiz.daniloamsilva.vercel.app/">
+                https://alura-pokemon-quiz.daniloamsilva.vercel.app/
+              </a>
             </Widget.Content>
           </Widget>
           <Footer />
