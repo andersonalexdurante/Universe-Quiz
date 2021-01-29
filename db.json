@@ -4,15 +4,15 @@
   "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
   "questions": [
     {
-      "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-      "title": "Como fazer um seletor por id via CSS?",
-      "description": "Essa é pra aquecer",
+      "image": "https://media0.giphy.com/media/2ZtH6VmZwcPtK/giphy.gif?cid=ecf05e47pw7oc5ko8eyxuzsdb7a9t1ipjyzguodv8bgpxql1&rid=giphy.gif",
+      "title": "Quantas luas tem o maior planeta do Sistema Solar, Júpiter?",
+      "description": "A lua mais grande de Júpiter é Ganímedes, chegando a ser maior que o planeta Mercúrio",
       "answer": 2,
       "alternatives": [
-        ".elemento",
-        "*elemento",
-        "#elemento",
-        "%elemento"
+        "93 luas",
+        "55 luas",
+        "79 luas",
+        "122 luas"
       ]
     },
     {
