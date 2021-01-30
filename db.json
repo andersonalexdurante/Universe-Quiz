@@ -16,13 +16,111 @@
       ]
     },
     {
-      "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-      "title": "Como fazer um background gradiente com css?",
-      "description": "Faz tempo em haha",
+      "image": "https://media3.giphy.com/media/xUA7aODUw7HNwUtqpO/giphy.gif?cid=ecf05e47gzgol8opszmtg2sad5518hfbt35tlz7a79j1t8eu&rid=giphy.gif",
+      "title": "Qual constelação é essa?",
+      "description": "Parece um arqueiro, super maneiro né?",
+      "answer": 1,
+      "alternatives": [
+         "Cruzeiro do Sul",
+         "Órion",
+         "Ursa Menor",
+         "Hércules"
+      ]
+    },
+    {
+      "image": "https://media0.giphy.com/media/jO1XVgsXDilJYphVX8/giphy.gif",
+      "title": "Qual a galáxia mais próxima da nossa Via Láctea??",
+      "description": "Ela tá a cerca de ~2,5 milhões de anos-luz de distância da Terra :O ",
+      "answer": 3,
+      "alternatives": [
+         "M95",
+         "Galáxia do Olho Negro",
+         "Galáxia do Sombreiro",
+         "Andromeda"
+      ]
+    },
+    {
+      "image": "https://media0.giphy.com/media/nOBrD8RFFByu9RLSm8/giphy.gif",
+      "title": "Que fenômeno é esse?",
+      "description": "Preste atenção na bolinha vermelha!",
       "answer": 0,
       "alternatives": [
-         "background: linear-gradient(#e66465, #9198e5);",
-         "background: gradient(#e66465, #9198e5);"
+         "Supernova",
+         "Buraco Negro engolindo uma estrela",
+         "Um farolete interestelar",
+         "Raios Gama"
+      ]
+    }, 
+    {
+      "image": "https://media1.giphy.com/media/l3dj5M4YLaFww31V6/giphy.gif?cid=ecf05e47b2g029wggxj8w37xrnu5lhaid4qg8pcusnpqvrt8&rid=giphy.gif",
+      "title": "Qual o destino final das maiores estrelas (massivas) do universo?",
+      "description": "No universo nada se perde, tudo se transforma",
+      "answer": 2,
+      "alternatives": [
+         "Anã Branca",
+         "Ela se apaga",
+         "Estrela de Neutrôns ou Buraco Negro",
+         "Ela cria uma Supernova"
+      ]
+    },
+    {
+      "image": "https://media4.giphy.com/media/xUA7aQWDNhElgR3NUQ/giphy.gif?cid=ecf05e475fbtx5ppcwq6xu5yplyymv8pbkl14iodgczgrpvw&rid=giphy.gif",
+      "title": "O que é uma nebulosa?",
+      "description": "Além de ser um grande berçário de estrelas jovens",
+      "answer": 1,
+      "alternatives": [
+         "Uma galáxia sem forma",
+         "São nuvens formadas por poeira estelar",
+         "Restos de uma estrela que explodiu",
+         "Filha do Thanos"
+      ]
+    },
+    {
+      "image": "https://www.fictiontofact.com/files/media/44073/voyager.gif",
+      "title": "Em que ano foi lançada a Voyager 1?",
+      "description": "Ela é o objeto construído por humanos mais longe da Terra, atualmente ela está no espaço Interestelar, a mais de 22 bilhões de km da Terra",
+      "answer": 3,
+      "alternatives": [
+         "1980",
+         "1991",
+         "1968",
+         "1977"
+      ]
+    },
+    {
+      "image": "https://media0.giphy.com/media/GJqJXAx8nUfAs/giphy.gif?cid=ecf05e47yozb51j6oegnr2wgcibd24wlsycd39eqw1iyz0vz&rid=giphy.gif",
+      "title": "Qual o objeto já descoberto mais longe que orbita o Sol?",
+      "description": "Muito além de Plutão!",
+      "answer": 2,
+      "alternatives": [
+         "Ultima Thule",
+         "Ceres",
+         "FarFarOut",
+         "Makemake"
+      ]
+    },
+    {
+      "image": "https://media4.giphy.com/media/2UxWBIttMvvIJ55hTe/giphy.gif?cid=ecf05e47oz8xzn40c7ozwymcsk5qpasqofm6nccgnu3yvlyt&rid=giphy.gif",
+      "title": "Qual o fenômeno que faz as galáxias se afastarem uma das outras cada vez mais rápido?",
+      "description": "Não sabemos ainda como acontece, mas sabemos que existe pois podemos observar suas implicações",
+      "answer": 0,
+      "alternatives": [
+         "Energia Escura",
+         "Matéria Escura",
+         "Big Crunch",
+         "Big Bang"
+      ]
+    },
+     {
+      "image": "https://media4.giphy.com/media/SVCSsoKU5v6ZJLk07n/giphy.gif?cid=ecf05e47qayit6ewkxawbfzjsxytzcwjk3ed93e54x9ld28d&rid=giphy.gif",
+      "title": "O que é um buraco negro?",
+      "description": "O buraco negro não emite radiação, portanto é impossível observá-lo diretamente",
+      "answer": 0,
+      "alternatives": [
+         "Um portal para outra dimensão",
+         "Uma dobra no espaço-tempo",
+         "Um objeto com massa infinita",
+         "Uma estrela preta"
       ]
     }
   ],
