@@ -11,6 +11,7 @@ import QuizContainer from "../src/components/QuizContainer";
 import Input from "../src/components/Input";
 import Button from "../src/components/Button";
 import Background from "../src/components/Background";
+import LinkQuiz from "../src/components/LinkQuiz";
 import AstrounautAnimation from "../src/components/AstrounautAnimation";
 import animationDataBackground from "../src/assets/background.json";
 
@@ -80,10 +81,12 @@ export default function Home() {
 
           <Widget>
             <Widget.Content>
-              <h1>Outros Quizes Topzera</h1>
-              <a href="https://alura-pokemon-quiz.daniloamsilva.vercel.app/">
-                https://alura-pokemon-quiz.daniloamsilva.vercel.app/
-              </a>
+              <h1 style={{ marginBottom: 20 }}>Outros Quizes Topzera</h1>
+              <LinkQuiz>
+                <a href="https://alura-pokemon-quiz.daniloamsilva.vercel.app/">
+                  Pokémon - Danilo Augusto
+                </a>
+              </LinkQuiz>
             </Widget.Content>
           </Widget>
           <Footer />
