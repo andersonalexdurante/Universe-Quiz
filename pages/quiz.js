@@ -13,16 +13,31 @@ import Background from "../src/components/Background";
 import AstrounautAnimation from "../src/components/AstrounautAnimation";
 
 export default function QuizPage() {
+  const screenStates = {
+    QUIZ: "QUIZ",
+    LOADING: "LOADING",
+    SUBMIT: "SUBMIT",
+    RESULT: "RESULT",
+  };
   const totalQuestions = db.questions.length;
   const [questionIndexState, setQuestionIndexState] = useState(0);
   const [currentQuestionState, setCurrentQuestState] = useState({});
-  const [loadingState, setLoadingState] = useState(false);
+  const [screenState, setScreenState] = useState(screenStates.LOADING);
+  const [resultsState, setResultsState] = useState([]);
+
+  const questionId = `question__${questionIndexState}`;
+  const [selectedAlternativeState, setSelectedAlternativeState] = useState(
+    undefined
+  );
+  const hasAlternativeSelected = selectedAlternativeState !== undefined;
+  const [isFormSubmitedState, setIsFormSubmitedState] = useState(false);
+  const isCorrect = selectedAlternativeState === currentQuestionState.answer;
 
   useEffect(() => {
     setTimeout(() => {
-      setLoadingState(true);
-    }, 1 * 1000);
-  }, []);
+      setScreenState(screenStates.QUIZ);
+    }, 3 * 1000);
+  }, [isFormSubmitedState]);
 
   useEffect(() => {
     setCurrentQuestState(db.questions[questionIndexState]);
@@ -43,58 +58,16 @@ export default function QuizPage() {
     const nextQuestion = questionIndexState + 1;
 
     if (nextQuestion < totalQuestions) {
-      setQuestionIndexState(nextQuestion);
+      setScreenState(screenStates.SUBMIT);
+      setTimeout(() => {
+        setQuestionIndexState(nextQuestion);
+        setIsFormSubmitedState(false);
+        setSelectedAlternativeState(undefined);
+      }, 3 * 1000);
     } else {
-      //resultado
+      setScreenState(screenStates.RESULT);
     }
   }
-
-  const QuestionWidget = ({
-    currentQuestionState,
-    totalQuestions,
-    questionIndexState,
-    onSubmit,
-  }) => {
-    const questionId = `question__${questionIndexState}`;
-    return (
-      <Widget>
-        <Widget.Header>
-          <h3>
-            Pergunta {questionIndexState + 1} de {totalQuestions}
-          </h3>
-        </Widget.Header>
-        <img
-          src={currentQuestionState.image}
-          alt="Imagem"
-          style={{ width: "100%", height: "150px", objectFit: "cover" }}
-        />
-        <Widget.Content>
-          <h2>{currentQuestionState.title}</h2>
-          <p>{currentQuestionState.description}</p>
-
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              onSubmit();
-            }}
-          >
-            {currentQuestionState.alternatives.map(
-              (alternatives, alternativeIndex) => {
-                const alternativeId = `alternative__${alternativeIndex}`;
-                return (
-                  <Widget.Topic as="label" htmlFor={alternativeId}>
-                    <input id={alternativeId} name={questionId} type="radio" />
-                    {alternatives}
-                  </Widget.Topic>
-                );
-              }
-            )}
-            <Button type="submit">Confirmar</Button>
-          </form>
-        </Widget.Content>
-      </Widget>
-    );
-  };
 
   return (
     <>
@@ -109,14 +82,7 @@ export default function QuizPage() {
       <Container>
         <QuizContainer>
           <QuizLogo />
-          {loadingState ? (
-            <QuestionWidget
-              currentQuestionState={currentQuestionState}
-              totalQuestions={totalQuestions}
-              questionIndexState={questionIndexState}
-              onSubmit={handleSubmitQuiz}
-            />
-          ) : (
+          {screenState === screenStates.LOADING && (
             <Widget>
               <Lottie
                 isClickToPauseDisabled={true}
@@ -124,6 +90,77 @@ export default function QuizPage() {
                 height={300}
                 width={300}
               />
+            </Widget>
+          )}
+          {screenState === screenStates.QUIZ && (
+            <Widget>
+              <Widget.Header>
+                <h3>
+                  Pergunta {questionIndexState + 1} de {totalQuestions}
+                </h3>
+              </Widget.Header>
+              <img
+                src={currentQuestionState.image}
+                alt="Imagem"
+                style={{ width: "100%", height: "150px", objectFit: "cover" }}
+              />
+              <Widget.Content>
+                <h2>{currentQuestionState.title}</h2>
+                <p>{currentQuestionState.description}</p>
+
+                <form
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    setIsFormSubmitedState(true);
+                    handleSubmitQuiz();
+                  }}
+                >
+                  {currentQuestionState.alternatives.map(
+                    (alternative, alternativeIndex) => {
+                      const alternativeId = `alternative__${alternativeIndex}`;
+                      const isSelected =
+                        selectedAlternativeState === alternativeIndex;
+
+                      return (
+                        <Widget.Topic
+                          as="label"
+                          key={alternativeId}
+                          htmlFor={alternativeId}
+                          data-selected={isSelected}
+                        >
+                          <input
+                            id={alternativeId}
+                            name={questionId}
+                            onClick={() =>
+                              setSelectedAlternativeState(alternativeIndex)
+                            }
+                            type="radio"
+                          />
+                          {alternative}
+                        </Widget.Topic>
+                      );
+                    }
+                  )}
+                  <Button type="submit" disabled={!hasAlternativeSelected}>
+                    Confirmar
+                  </Button>
+                </form>
+              </Widget.Content>
+            </Widget>
+          )}
+
+          {screenState === screenStates.SUBMIT && (
+            <Widget>
+              {isFormSubmitedState && isCorrect && (
+                <Widget.Header>
+                  <h3 style={{ fontSize: "50px" }}>Você Acertou!</h3>
+                </Widget.Header>
+              )}
+              {isFormSubmitedState && !isCorrect && (
+                <Widget.Header>
+                  <h3 style={{ fontSize: "50px" }}>Você Errou!</h3>
+                </Widget.Header>
+              )}
             </Widget>
           )}
         </QuizContainer>

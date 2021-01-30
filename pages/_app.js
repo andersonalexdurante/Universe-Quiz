@@ -24,6 +24,12 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
+  label, input {
+  /* added because a second click to unselect radio often
+     appears as a double click to select text */
+  -webkit-user-select: none;
+  user-select: none;
+}
 `;
 
 const { theme } = db;
