@@ -42,10 +42,7 @@ export default function Home() {
       </Background>
       <Head>
         <title>Home - Universo Quiz</title>
-        <meta
-          property="og:image"
-          content="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=4528&q=80"
-        />
+        <meta property="og:image" content="https://i.imgur.com/m8w4KbO.png" />
       </Head>
 
       <Container>
