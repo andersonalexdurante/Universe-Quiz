@@ -8,22 +8,27 @@ import db from "../db.json";
 import Lottie from "react-lottie";
 import animationDataLoading from "../src/assets/loading.json";
 import animationDataBackground from "../src/assets/background.json";
+import animationDataResult from "../src/assets/result.json";
 import { useState, useEffect } from "react";
 import Background from "../src/components/Background";
 import AstrounautAnimation from "../src/components/AstrounautAnimation";
+import { useRouter } from "next/router";
 
 export default function QuizPage() {
+  const router = useRouter();
   const screenStates = {
     QUIZ: "QUIZ",
     LOADING: "LOADING",
     SUBMIT: "SUBMIT",
     RESULT: "RESULT",
   };
+  const { name } = router.query;
+
   const totalQuestions = db.questions.length;
   const [questionIndexState, setQuestionIndexState] = useState(0);
   const [currentQuestionState, setCurrentQuestState] = useState({});
   const [screenState, setScreenState] = useState(screenStates.LOADING);
-  const [resultsState, setResultsState] = useState([]);
+  const [resultsState, setResultsState] = useState(0);
 
   const questionId = `question__${questionIndexState}`;
   const [selectedAlternativeState, setSelectedAlternativeState] = useState(
@@ -32,11 +37,14 @@ export default function QuizPage() {
   const hasAlternativeSelected = selectedAlternativeState !== undefined;
   const [isFormSubmitedState, setIsFormSubmitedState] = useState(false);
   const isCorrect = selectedAlternativeState === currentQuestionState.answer;
+  const [questionsResultState, setQuestionsResultState] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setScreenState(screenStates.QUIZ);
-    }, 3 * 1000);
+    if (screenState !== screenStates.RESULT) {
+      setTimeout(() => {
+        setScreenState(screenStates.QUIZ);
+      }, 3 * 1000);
+    }
   }, [isFormSubmitedState]);
 
   useEffect(() => {
@@ -57,6 +65,11 @@ export default function QuizPage() {
   function handleSubmitQuiz() {
     const nextQuestion = questionIndexState + 1;
 
+    setQuestionsResultState([...questionsResultState, isCorrect]);
+    if (isCorrect) {
+      setResultsState(resultsState + 1);
+    }
+
     if (nextQuestion < totalQuestions) {
       setScreenState(screenStates.SUBMIT);
       setTimeout(() => {
@@ -68,6 +81,8 @@ export default function QuizPage() {
       setScreenState(screenStates.RESULT);
     }
   }
+
+  console.log(screenState);
 
   return (
     <>
@@ -81,7 +96,15 @@ export default function QuizPage() {
       </Background>
       <Container>
         <QuizContainer>
-          <QuizLogo />
+          <a
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <QuizLogo />
+          </a>
+
           {screenState === screenStates.LOADING && (
             <Widget>
               <Lottie
@@ -135,6 +158,7 @@ export default function QuizPage() {
                               setSelectedAlternativeState(alternativeIndex)
                             }
                             type="radio"
+                            disabled={isFormSubmitedState}
                           />
                           {alternative}
                         </Widget.Topic>
@@ -148,19 +172,67 @@ export default function QuizPage() {
               </Widget.Content>
             </Widget>
           )}
-
           {screenState === screenStates.SUBMIT && (
             <Widget>
               {isFormSubmitedState && isCorrect && (
                 <Widget.Header>
-                  <h3 style={{ fontSize: "50px" }}>Você Acertou!</h3>
+                  <h3 style={{ fontSize: "50px" }}>
+                    Você <span style={{ color: "#76ff03" }}>Acertou!</span>
+                  </h3>
                 </Widget.Header>
               )}
               {isFormSubmitedState && !isCorrect && (
                 <Widget.Header>
-                  <h3 style={{ fontSize: "50px" }}>Você Errou!</h3>
+                  <h3 style={{ fontSize: "50px" }}>
+                    Você <span style={{ color: "#ff1744" }}>Errou!</span>
+                  </h3>
                 </Widget.Header>
               )}
+            </Widget>
+          )}
+          {screenState === screenStates.RESULT && (
+            <Widget>
+              <Widget.Header>
+                <h3>Parabéns, {name}!</h3>
+              </Widget.Header>
+              <Widget.Content>
+                <h3>
+                  Você acertou {resultsState} das {totalQuestions} questões!
+                </h3>
+
+                <ul>
+                  {questionsResultState.map((result, index) => {
+                    return (
+                      <Widget.Topic key={index}>
+                        {result ? (
+                          <li style={{ color: "#76ff03" }}>
+                            Questão {index + 1}: Acertou
+                          </li>
+                        ) : (
+                          <li style={{ color: "#ff1744" }}>
+                            {" "}
+                            Questão {index + 1}: Errou
+                          </li>
+                        )}
+                      </Widget.Topic>
+                    );
+                  })}
+                </ul>
+                <Lottie
+                  isClickToPauseDisabled={true}
+                  options={AnimationOptions(animationDataResult)}
+                  width={200}
+                  height={200}
+                />
+
+                <Button
+                  onClick={() => {
+                    router.push("/");
+                  }}
+                >
+                  Retornar ao Menu
+                </Button>
+              </Widget.Content>
             </Widget>
           )}
         </QuizContainer>

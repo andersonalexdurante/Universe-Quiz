@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
   -webkit-user-select: none;
   user-select: none;
 }
-a:visited { text-decoration: none; color:white; }
+a:visited, p { text-decoration: none; color:white; }
 `;
 
 const { theme } = db;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LinkQuiz = styled.a`
+const LinkQuiz = styled.div`
   display: block;
   color: ${({ theme }) => theme.colors.mainBg};
   background-color: ${({ theme }) => theme.colors.secondary};
