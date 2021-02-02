@@ -125,7 +125,9 @@
     }
   ],
   "external": [
-    ""
+    "https://alura-pokemon-quiz.daniloamsilva.vercel.app",
+    
+    "https://harry-potter-quiz.brunogerbasi.vercel.app/"
   ],
   "theme": {
     "colors": {

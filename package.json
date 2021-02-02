@@ -5,9 +5,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start"
-    
   },
   "dependencies": {
+    "framer-motion": "^3.3.0-beta.22",
     "next": "latest",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.8.0"
-   
   },
   "license": "MIT"
 }

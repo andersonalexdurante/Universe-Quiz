@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Lato', sans-serif;
     // Deixa branco no começo
     color: ${({ theme }) => theme.colors.contrastText};
+    overflow-x: hidden;
   }
   html, body {
     min-height: 100vh;

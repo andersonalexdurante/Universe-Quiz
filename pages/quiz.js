@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import Background from "../src/components/Background";
 import AstrounautAnimation from "../src/components/AstrounautAnimation";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function QuizPage() {
   const router = useRouter();
@@ -82,8 +83,6 @@ export default function QuizPage() {
     }
   }
 
-  console.log(screenState);
-
   return (
     <>
       <Background>
@@ -96,17 +95,19 @@ export default function QuizPage() {
       </Background>
       <Container>
         <QuizContainer>
-          <a
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <QuizLogo />
-          </a>
+          <QuizLogo />
 
           {screenState === screenStates.LOADING && (
-            <Widget>
+            <Widget
+              as={motion.section}
+              variants={{
+                show: { opacity: 1 },
+                hidden: { opacity: 0 },
+              }}
+              initial="hidden"
+              animate="show"
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               <Lottie
                 isClickToPauseDisabled={true}
                 options={AnimationOptions(animationDataLoading)}
@@ -116,7 +117,16 @@ export default function QuizPage() {
             </Widget>
           )}
           {screenState === screenStates.QUIZ && (
-            <Widget>
+            <Widget
+              as={motion.section}
+              variants={{
+                show: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 20 },
+              }}
+              initial="hidden"
+              animate="show"
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               <Widget.Header>
                 <h3>
                   Pergunta {questionIndexState + 1} de {totalQuestions}
@@ -165,7 +175,13 @@ export default function QuizPage() {
                       );
                     }
                   )}
-                  <Button type="submit" disabled={!hasAlternativeSelected}>
+                  <Button
+                    type="submit"
+                    disabled={!hasAlternativeSelected}
+                    as={motion.button}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
                     Confirmar
                   </Button>
                 </form>
@@ -173,7 +189,16 @@ export default function QuizPage() {
             </Widget>
           )}
           {screenState === screenStates.SUBMIT && (
-            <Widget>
+            <Widget
+              as={motion.section}
+              variants={{
+                show: { opacity: 1, x: 0 },
+                hidden: { opacity: 0, x: -30 },
+              }}
+              initial="hidden"
+              animate="show"
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               {isFormSubmitedState && isCorrect && (
                 <Widget.Header>
                   <h3 style={{ fontSize: "50px" }}>
@@ -191,7 +216,16 @@ export default function QuizPage() {
             </Widget>
           )}
           {screenState === screenStates.RESULT && (
-            <Widget>
+            <Widget
+              as={motion.section}
+              variants={{
+                show: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 20 },
+              }}
+              initial="hidden"
+              animate="show"
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               <Widget.Header>
                 <h3>Parabéns, {name}!</h3>
               </Widget.Header>
@@ -229,6 +263,9 @@ export default function QuizPage() {
                   onClick={() => {
                     router.push("/");
                   }}
+                  as={motion.button}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   Retornar ao Menu
                 </Button>
