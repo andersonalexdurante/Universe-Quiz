@@ -44,6 +44,8 @@ export default function Home() {
       <Head>
         <title>Home - Universo Quiz</title>
         <meta property="og:image" content="https://i.imgur.com/m8w4KbO.png" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="600" />
       </Head>
       <Container>
         <QuizContainer>
